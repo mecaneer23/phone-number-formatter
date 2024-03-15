@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Number Formatter</title>
+</head>
+
+<body>
+    <label for="phone">Phone number:</label><br />
+    <input type="tel" id="phone">
+
+    <script>
+        const phone = document.getElementById("phone");
+        const regex3digits = new RegExp(/^[0-9]{3}$/, "g");
+        const regex6digits = new RegExp(/^\([0-9]{3}\) [0-9]{3}$/, "g");
+
+        function format() {
+            if (regex3digits.test(phone.value)) {
+                phone.value = `(${phone.value}) `;
+                return;
+            }
+            if (regex6digits.test(phone.value)) {
+                phone.value = `${phone.value}-`;
+                return;
+            }
+            if (phone.value.length == 15) {
+                phone.value = phone.value.substring(0, 14);
+            }
+        }
+
+        phone.addEventListener("keyup", format);
+    </script>
+</body>
+
+</html>
